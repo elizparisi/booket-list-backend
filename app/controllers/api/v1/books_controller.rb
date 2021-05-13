@@ -18,4 +18,10 @@ class Api::V1::BooksController < ApplicationController
 
   end
 
+  private
+
+  def book_params
+    params.require(:book).permit(:name, :author, :image_url, :read, :rating, :list_id)
+  end
+
 end
