@@ -1,5 +1,7 @@
 class Api::V1::ListsController < ApplicationController
 
+  before_action :set_list
+
   def index
     lists = List.all
 
@@ -19,6 +21,10 @@ class Api::V1::ListsController < ApplicationController
   end
 
   private
+
+  def set_list
+    @list = List.find(params[:list_id])
+  end
 
   def list_params
     params.require(:list).permit(:name)
