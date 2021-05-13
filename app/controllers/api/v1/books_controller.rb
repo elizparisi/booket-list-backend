@@ -5,4 +5,17 @@ class Api::V1::BooksController < ApplicationController
 
     render json: BookSerializer.new(books)
   end
+
+  def show
+
+  end
+
+  def create
+
+  end
+
+  def destroy
+
+  end
+
 end
