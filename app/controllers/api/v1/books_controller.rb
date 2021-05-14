@@ -11,7 +11,13 @@ class Api::V1::BooksController < ApplicationController
   end
 
   def create
+    # create book off of list bc we have nested routes
+    @book = @list.books.new(book_params)
 
+    if @book.save
+      render json: @list
+    else
+      render json: { errors: list.errors.full_messages }, status: unprocessible_entity
   end
 
   def destroy
