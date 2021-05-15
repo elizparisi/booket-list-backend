@@ -1,13 +1,15 @@
 class Api::V1::BooksController < ApplicationController
 
   def index
-    books = Book.all
+    @books = Book.all
 
-    render json: BookSerializer.new(books)
+    render json: @books
   end
 
   def show
+    @book = Book.find(params[:id])
 
+    render json: @book
   end
 
   def create
@@ -18,6 +20,7 @@ class Api::V1::BooksController < ApplicationController
       render json: @list
     else
       render json: { errors: list.errors.full_messages }, status: unprocessible_entity
+    end
   end
 
   def destroy
