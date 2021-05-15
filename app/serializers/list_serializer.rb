@@ -1,6 +1,5 @@
-class ListSerializer
-  include FastJsonapi::ObjectSerializer
+class ListSerializer < ActiveModel::Serializer
   attributes :name, :id
 
-  has_many :books 
+  has_many :books
 end
