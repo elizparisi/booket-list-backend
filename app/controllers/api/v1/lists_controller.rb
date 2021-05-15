@@ -3,9 +3,9 @@ class Api::V1::ListsController < ApplicationController
   # before_action :set_list
 
   def index
-    lists = List.all
+    @lists = List.all
 
-    render json: ListSerializer.new(lists)
+    render json: @lists
   end
 
   def show
@@ -13,18 +13,18 @@ class Api::V1::ListsController < ApplicationController
   end
 
   def create
-    list = List.new(list_params)
+    @list = List.new(list_params)
 
-    if list.save
-      render json: ListSerializer.new(list), status: accepted
+    if @list.save
+      render json: @list, status: accepted
     else
       render json: { errors: list.errors.full_messages }, status: unprocessible_entity
     end
   end
 
   def destroy
-    list = List.find(params[:id])
-    list.destroy
+    @list = List.find(params[:id])
+    @list.destroy
   end
 
   private
