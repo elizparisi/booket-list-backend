@@ -1,5 +1,7 @@
 class Api::V1::BooksController < ApplicationController
 
+before_action :set_list
+
   def index
     @books = Book.all
 
@@ -24,13 +26,21 @@ class Api::V1::BooksController < ApplicationController
   end
 
   def destroy
+    @book = Book.find(params[:id])
+    @list = List.find(@book.list_id)
+    @book.destroy
 
+    render json: @list
   end
 
   private
 
+  def set_list
+    @list = List.find(params[:list_id])
+  end
+
   def book_params
-    params.require(:book).permit(:name, :author, :image_url, :read, :rating, :list_id)
+    params.require(:book).permit(:title, :author, :image_url, :read, :rating, :list_id)
   end
 
 end
